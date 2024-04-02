@@ -13,8 +13,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return """<h1>Sort Part Finder</h1>
-<a href="http://127.0.0.1:5000/rooms">R&auml;ume</a>
-"""
+              <a href='http://127.0.0.1:5000/rooms'>Räume</a>"""
 
 
 @app.route("/rooms")
@@ -24,16 +23,26 @@ def getRooms():
 
     cur.execute("SELECT * FROM ROOMS")
 
-    response = """<h1>Sort Part Finder</h1><ul>"""
+    response = """<h1>Sort Part Finder</h1>
+                  <ul>"""
 
     for room in cur.fetchall():
-        response += f'<li>Id {room[0]} Name <a href="http://127.0.0.1:5000/storages/{room[0]}">{room[1]} </a><a href="http://127.0.0.1:5000/room/{room[0]}">Edit</a> </li>'
+        response += f"""
+        <li>
+          Id {room[0]} Name
+          <a href="http://127.0.0.1:5000/storages/{room[0]}">
+            {room[1]}
+          </a>
+          <a href="http://127.0.0.1:5000/room/{room[0]}">Edit</a>
+        </li>"""
 
     cur.close()
     conn.close()
 
-    response += "</ul>"
-    response += '<br><br> <a href="http://127.0.0.1:5000">Home</a>'
+    response += """</ul>
+                   <br><br>
+                   <a href='http://127.0.0.1:5000'>Home</a>"""
+
     return response
 
 
@@ -44,7 +53,7 @@ def getRoom(roomid):
 
     cur.execute(f"SELECT * FROM ROOMS WHERE ID={roomid}")
 
-    response = """<h1>Sort Part Finder</h1>"""
+    response = "<h1>Sort Part Finder</h1>"
 
     room = cur.fetchall()[0]
 
@@ -53,7 +62,8 @@ def getRoom(roomid):
     cur.close()
     conn.close()
 
-    response += '<br><br> <a href="http://127.0.0.1:5000/rooms">R&auml;ume</a>'
+    response += "<br><br> <a href='http://127.0.0.1:5000/rooms'>Räume</a>"
+
     return response
 
 
@@ -67,10 +77,14 @@ def getStorages(roomsid):
     response = """<h1>Sort Part Finder</h1><ul>"""
 
     for storage in cur.fetchall():
-        response += f"<li>Id {storage[0]} Name {storage[1]} </li>"
+        response += f"<li>Id {storage[0]} Name {storage[1]}</li>"
 
     cur.close()
     conn.close()
 
-    response += '</ul><br><br> <a href="http://127.0.0.1:5000/rooms">R&auml;ume</a>'
+    response += """</ul>
+                   <br><br>
+                   <a href="http://127.0.0.1:5000/rooms">Räume
+                   </a>"""
+
     return response
