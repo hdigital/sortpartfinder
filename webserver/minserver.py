@@ -6,6 +6,10 @@ Created on 14.01.2024
 
 from flask import Flask
 import sqlite3
+import os
+
+
+DB_PATH = os.path.join(os.path.dirname(__file__), "..", "database", "db.sqlite")
 
 app = Flask(__name__)
 
@@ -18,7 +22,7 @@ def index():
 
 @app.route("/rooms")
 def getRooms():
-    conn = sqlite3.connect("..\database\db.sqlite")
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     cur.execute("SELECT * FROM ROOMS")
@@ -48,7 +52,7 @@ def getRooms():
 
 @app.route("/room/<roomid>")
 def getRoom(roomid):
-    conn = sqlite3.connect("..\database\db.sqlite")
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     cur.execute(f"SELECT * FROM ROOMS WHERE ID={roomid}")
@@ -69,7 +73,7 @@ def getRoom(roomid):
 
 @app.route("/storages/<roomsid>")
 def getStorages(roomsid):
-    conn = sqlite3.connect("..\database\db.sqlite")
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     cur.execute(f"SELECT * FROM STORAGES WHERE roomsid={roomsid}")
