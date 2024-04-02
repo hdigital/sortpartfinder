@@ -18,7 +18,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return f"""<h1>Sort Part Finder</h1>
-               <a href='{LOCALHOST}/rooms'>Räume</a>"""
+               <a href='/rooms'>Räume</a>"""
 
 
 @app.route("/rooms")
@@ -35,10 +35,10 @@ def getRooms():
         response += f"""
         <li>
           Id {room[0]} Name
-          <a href="{LOCALHOST}/storages/{room[0]}">
+          <a href="../storages/{room[0]}">
             {room[1]}
           </a>
-          <a href="{LOCALHOST}/room/{room[0]}">Edit</a>
+          <a href="../room/{room[0]}">Edit</a>
         </li>"""
 
     cur.close()
@@ -46,7 +46,7 @@ def getRooms():
 
     response += f"""</ul>
                     <br><br>
-                    <a href='{LOCALHOST}'>Home</a>"""
+                    <a href='..'>Home</a>"""
 
     return response
 
@@ -67,7 +67,7 @@ def getRoom(roomid):
     cur.close()
     conn.close()
 
-    response += f"<br><br> <a href='{LOCALHOST}/rooms'>Räume</a>"
+    response += f"<br><br> <a href='../rooms'>Räume</a>"
 
     return response
 
@@ -89,7 +89,7 @@ def getStorages(roomsid):
 
     response += f"""</ul>
                     <br><br>
-                    <a href="{LOCALHOST}/rooms">Räume
+                    <a href="../rooms">Räume
                     </a>"""
 
     return response
