@@ -6,6 +6,12 @@ Finde sortierte Teile in deiner Werkstatt.
 
 ![Schublade](/picture/schublade.png)
 
+## Start
+
+```sh
+cd webserver && python -m flask --app minserver run
+```
+
 ## Layout
 
 ![Layout](/picture/layout.png)
