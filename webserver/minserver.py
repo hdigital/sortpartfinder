@@ -10,14 +10,15 @@ import os
 
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "..", "database", "db.sqlite")
+LOCALHOST = "http://127.0.0.1:5000"
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    return """<h1>Sort Part Finder</h1>
-              <a href='http://127.0.0.1:5000/rooms'>Räume</a>"""
+    return f"""<h1>Sort Part Finder</h1>
+               <a href='{LOCALHOST}/rooms'>Räume</a>"""
 
 
 @app.route("/rooms")
@@ -34,18 +35,18 @@ def getRooms():
         response += f"""
         <li>
           Id {room[0]} Name
-          <a href="http://127.0.0.1:5000/storages/{room[0]}">
+          <a href="{LOCALHOST}/storages/{room[0]}">
             {room[1]}
           </a>
-          <a href="http://127.0.0.1:5000/room/{room[0]}">Edit</a>
+          <a href="{LOCALHOST}/room/{room[0]}">Edit</a>
         </li>"""
 
     cur.close()
     conn.close()
 
-    response += """</ul>
-                   <br><br>
-                   <a href='http://127.0.0.1:5000'>Home</a>"""
+    response += f"""</ul>
+                    <br><br>
+                    <a href='{LOCALHOST}'>Home</a>"""
 
     return response
 
@@ -66,7 +67,7 @@ def getRoom(roomid):
     cur.close()
     conn.close()
 
-    response += "<br><br> <a href='http://127.0.0.1:5000/rooms'>Räume</a>"
+    response += f"<br><br> <a href='{LOCALHOST}/rooms'>Räume</a>"
 
     return response
 
@@ -86,9 +87,9 @@ def getStorages(roomsid):
     cur.close()
     conn.close()
 
-    response += """</ul>
-                   <br><br>
-                   <a href="http://127.0.0.1:5000/rooms">Räume
-                   </a>"""
+    response += f"""</ul>
+                    <br><br>
+                    <a href="{LOCALHOST}/rooms">Räume
+                    </a>"""
 
     return response
