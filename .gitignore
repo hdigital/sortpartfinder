@@ -1,0 +1,16 @@
+.DS_Store
+.vscode/settings.json
+
+## Python ---------------------------------------------------------------------
+## see also https://github.com/github/gitignore/blob/main/Python.gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv
+
+# Ruff code quality
+.ruff_cache
